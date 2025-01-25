@@ -1,0 +1,16 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#game-area{
+    width: 90vw;
+    height: 90vh;
+    background-color: rgb(13, 115, 25);
+    position: relative;
+}
+
+#player{
+width: 10vw;
+height: 20vh;
+position: absolute;
+}
