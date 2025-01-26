@@ -3,14 +3,22 @@ body{
     padding: 0;
 }
 #game-area{
-    width: 90vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
     background-color: rgb(13, 115, 25);
     position: relative;
+    overflow: hidden;
 }
 
 #player{
-width: 10vw;
-height: 20vh;
 position: absolute;
 }
+#player2{
+position: absolute;
+}
+#player3{
+position: absolute;
+}
+#player4{
+position: absolute;
+ }
