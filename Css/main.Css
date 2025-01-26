@@ -1,24 +1,31 @@
-body{
+body {
     margin: 0;
-    padding: 0;
-}
-#game-area{
-    width: 100vw;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    background-color: rgb(13, 115, 25);
+    overflow: hidden; /* Evita el scroll */
+}
+#gameScreen {
+    width: 480px; /* Relación de aspecto 4:3 */
+    height: 640px; /* Relación de aspecto 4:3 */
+    border: 5px solid white; /* Simula el marco de una máquina arcade */
     position: relative;
-    overflow: hidden;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#board {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #444; /* Color visible del tablero */
+    border: 2px solid white; /* Para ver el contorno */
 }
 
-#player{
-position: absolute;
+#player, #player2, #player3, #player4 {
+    position: absolute;
+    background-color: rgb(255, 202, 127);
 }
-#player2{
-position: absolute;
-}
-#player3{
-position: absolute;
-}
-#player4{
-position: absolute;
- }

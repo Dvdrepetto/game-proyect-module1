@@ -7,30 +7,34 @@ class Player {
         this.id = id;
 
         this.playerElm = document.getElementById(this.id);
-        if(!this.playerElm){
-            console.error(`element id "${this.id}" not found`);
-        return;
-        }
         this.draw();
 
     }
     draw() {
-        this.playerElm.style.width = this.width + 'vw';
-        this.playerElm.style.height = this.height + 'vh';
-        this.playerElm.style.left = this.xCoord + 'vw';
-        this.playerElm.style.bottom = this.yCoord + 'vh';
-        this.playerElm.style.backgroundColor = "rgb(255, 202, 127)";
-
+        const board = document.getElementById("board");
+        const boardWidth = board.offsetWidth;
+        const boardHeight = board.offsetHeight;
+    
+        const absoluteWidth = (this.width / 100) * boardWidth;
+        const absoluteHeight = (this.height / 100) * boardHeight;
+        const absoluteX = (this.xCoord / 100) * boardWidth;
+        const absoluteY = (this.yCoord / 100) * boardHeight;
+    
+        this.playerElm.style.position = "absolute";
+        this.playerElm.style.width = absoluteWidth + "px";
+        this.playerElm.style.height = absoluteHeight + "px";
+        this.playerElm.style.left = absoluteX + "px";
+        this.playerElm.style.top = absoluteY + "px";
     }
     moveDown(){
         if(this.yCoord > 0){
-            this.yCoord--;
+            this.yCoord++;
             this.draw();
         }
     }
     moveUp(){
         if(this.yCoord < 100 - this.height){
-            this.yCoord++;
+            this.yCoord--;
             this.draw();
         }
     }
@@ -54,12 +58,18 @@ class Ball {
 
     }
 }
-const gameBoard = document.getElementById("game-area");
 
-const player = new Player(5,20,5,40, 'player')
+const player = new Player(5,20,5,40, 'player');
 const player2 = new Player(5,20,90,40, 'player2');
 const player3 = new Player(20,5,40,5, 'player3');
 const player4 = new Player(20,5,40,90, 'player4');
+
+window.addEventListener("resize", () => {
+    player.draw();
+    player2.draw();
+    player3.draw();
+    player4.draw();
+});
 
 document.addEventListener('keydown',(e)=>{
     if(e.code === "ArrowUp"){
