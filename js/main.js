@@ -78,6 +78,7 @@ class Ball {
     }
 
     move(players) {
+        if (this.gameOver) return;
         const board = document.getElementById("board");
         const boardWidth = board.offsetWidth;
         const boardHeight = board.offsetHeight;
@@ -102,7 +103,7 @@ class Ball {
 
         if (this.positionX <= 0 || this.positionX + this.width >= boardWidth || this.positionY <= 0 || this.positionY + this.height >= boardHeight) {
             console.log("Game Over");
-            //this.gameOver = true;
+            this.gameOver = true;
         }
 
         this.drawBall();
@@ -125,34 +126,73 @@ class Ball {
     }
 
     handleCollision(player) {
-
         const board = document.getElementById("board");
         const boardWidth = board.offsetWidth;
         const boardHeight = board.offsetHeight;
-
+    
         const playerX = (player.xCoord / 100) * boardWidth;
         const playerY = (player.yCoord / 100) * boardHeight;
         const playerWidth = (player.width / 100) * boardWidth;
         const playerHeight = (player.height / 100) * boardHeight;
-
-        if (
-        this.positionY + this.height >= playerY &&
-        this.positionY + this.height <= playerY + playerHeight / 2 &&
-        this.positionX + this.width > playerX &&
-        this.positionX < playerX + playerWidth
-        ) {
+    
+        //here i descover how to keep the velocity 
         const totalSpeed = Math.sqrt(this.xSpeed ** 2 + this.ySpeed ** 2);
-
-        const collisionPoint = (this.positionX + this.width / 2) - (playerX + playerWidth / 2);
-        const normalizedCollisionPoint = collisionPoint / (playerWidth / 2);
-
-        this.ySpeed = -Math.abs(this.ySpeed);
-        this.xSpeed = normalizedCollisionPoint * totalSpeed;
+    
+        if (player.id === "player") {
+            if (
+                this.positionX + this.width >= playerX && 
+                this.positionX <= playerX + playerWidth && 
+                this.positionY + this.height > playerY &&
+                this.positionY < playerY + playerHeight
+            ) {
+                console.log("Rebotó en player izquierdo");
+                this.xSpeed = Math.abs(this.xSpeed); 
+                this.positionX = playerX + playerWidth;
+            }
+        }
+        if (player.id === "player2") {
+            if (
+                this.positionX <= playerX && 
+                this.positionX + this.width >= playerX &&
+                this.positionY + this.height > playerY &&
+                this.positionY < playerY + playerHeight
+            ) {
+                console.log("Rebotó en player derecho");
+                this.xSpeed = -Math.abs(this.xSpeed); 
+                this.positionX = playerX - this.width;
+            }
+        }
+    
+        if (player.id === "player3") {
+            if (
+                this.positionY + this.height >= playerY && 
+                this.positionY <= playerY + playerHeight &&
+                this.positionX + this.width > playerX && 
+                this.positionX < playerX + playerWidth
+            ) {
+                console.log("Rebotó en player superior");
+                this.ySpeed = Math.abs(this.ySpeed); 
+                this.positionY = playerY + playerHeight;
+            }
+        }
+    
+        if (player.id === "player4") {
+            if (
+                this.positionY <= playerY && 
+                this.positionY + this.height >= playerY && 
+                this.positionX + this.width > playerX && 
+                this.positionX < playerX + playerWidth
+            ) {
+                console.log("Rebotó en player inferior");
+                this.ySpeed = -Math.abs(this.ySpeed); 
+                this.positionY = playerY - this.height;
+            }
+        }
         const magnitude = Math.sqrt(this.xSpeed ** 2 + this.ySpeed ** 2);
         this.xSpeed = (this.xSpeed / magnitude) * totalSpeed;
         this.ySpeed = (this.ySpeed / magnitude) * totalSpeed;
-        }
     }
+
 
     drawBall() {
         const ballElm = document.getElementById('ball');
