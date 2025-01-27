@@ -78,7 +78,9 @@ class Ball {
     }
 
     move(players) {
-        if (this.gameOver) return;
+        if (this.gameOver){
+            location.href = "gameover.html";
+        };
         const board = document.getElementById("board");
         const boardWidth = board.offsetWidth;
         const boardHeight = board.offsetHeight;
@@ -135,7 +137,6 @@ class Ball {
         const playerWidth = (player.width / 100) * boardWidth;
         const playerHeight = (player.height / 100) * boardHeight;
     
-        //here i descover how to keep the velocity 
         const totalSpeed = Math.sqrt(this.xSpeed ** 2 + this.ySpeed ** 2);
     
         if (player.id === "player") {

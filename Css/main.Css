@@ -6,16 +6,12 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    /* Evita el scroll */
 }
 
 #gameScreen {
     width: 480px;
-    /* Relación de aspecto 4:3 */
     height: 640px;
-    /* Relación de aspecto 4:3 */
     border: 5px solid white;
-    /* Simula el marco de una máquina arcade */
     position: relative;
     background-color: #222;
     display: flex;
@@ -28,11 +24,15 @@ body {
     height: 100%;
     position: relative;
     background-color: #444;
-    /* Color visible del tablero */
     border: 1px solid white;
-    /* Para ver el contorno */
 }
 
 #ball{
     position: absolute;
+}
+
+#page-gameover{
+    display: block;
+text-align: center;
+background-color: #444;
 }
