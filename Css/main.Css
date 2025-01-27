@@ -5,27 +5,34 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* Evita el scroll */
+    overflow: hidden;
+    /* Evita el scroll */
 }
+
 #gameScreen {
-    width: 480px; /* Relación de aspecto 4:3 */
-    height: 640px; /* Relación de aspecto 4:3 */
-    border: 5px solid white; /* Simula el marco de una máquina arcade */
+    width: 480px;
+    /* Relación de aspecto 4:3 */
+    height: 640px;
+    /* Relación de aspecto 4:3 */
+    border: 5px solid white;
+    /* Simula el marco de una máquina arcade */
     position: relative;
     background-color: #222;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 #board {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: #444; /* Color visible del tablero */
-    border: 2px solid white; /* Para ver el contorno */
+    background-color: #444;
+    /* Color visible del tablero */
+    border: 1px solid white;
+    /* Para ver el contorno */
 }
 
-#player, #player2, #player3, #player4 {
+#ball{
     position: absolute;
-    background-color: rgb(255, 202, 127);
 }
