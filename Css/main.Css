@@ -6,8 +6,8 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-   background-image: url(../Assets/backgorund1.jpg);
-   background-size: cover;
+    background-image: url(../Assets/backgorund1.jpg);
+    background-size: cover;
 }
 
 #gameScreen {
@@ -20,6 +20,17 @@ body {
     justify-content: center;
     align-items: center;
 }
+#timer{
+    position: absolute; 
+    top: 200px; 
+    left: 200px; 
+    font-size: 20px; 
+    color: white; 
+    background-color: 
+    rgba(0, 0, 0, 0.5); 
+    padding: 5px 10px; 
+    border-radius: 5px;
+}
 
 #board {
     width: 100%;
@@ -29,12 +40,17 @@ body {
     border: 1px solid white;
 }
 
-#ball{
+#ball {
     position: absolute;
 }
-
-#page-gameover{
+#index-page{
     display: block;
-text-align: center;
-background-color: #444;
+    text-align: center;
+    color: aliceblue;
+}
+
+#page-gameover {
+    display: block;
+    text-align: center;
+    color: aliceblue;
 }

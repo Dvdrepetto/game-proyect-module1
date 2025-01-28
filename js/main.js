@@ -62,6 +62,7 @@ class Player {
         this.playerElm.style.backgroundPosition = "center"
         this.playerElm.style.backgroundColor = "rgb(255, 202, 127)";
         this.playerElm.style.border = "2px solid black";
+        this.playerElm.style.borderRadius = "30%"
     }
 }
 
@@ -82,15 +83,15 @@ class Ball {
     }
 
     move(players) {
-        if (this.gameOver) {
+        // if (this.gameOver) {
 
-            setTimeout(() => {
-                location.href = "gameover.html";
-            }, 1500);
+        //     setTimeout(() => {
+        //         location.href = "gameover.html";
+        //     }, 1500);
 
-            soundGameOver.play();
-            return;
-        };
+        //     soundGameOver.play();
+        //     return;
+        // };
 
         const boardWidth = this.board.offsetWidth;
         const boardHeight = this.board.offsetHeight;
@@ -160,8 +161,8 @@ class Ball {
 
         if (player.id === "player") {
             if (
-                this.positionX + this.width >= playerX &&
-                this.positionX <= playerX + playerWidth &&
+                this.positionX + this.width > playerX &&
+                this.positionX < playerX + playerWidth &&
                 this.positionY + this.height > playerY &&
                 this.positionY < playerY + playerHeight
             ) {
@@ -173,8 +174,8 @@ class Ball {
         }
         if (player.id === "player2") {
             if (
-                this.positionX <= playerX &&
-                this.positionX + this.width >= playerX &&
+                this.positionX < playerX &&
+                this.positionX + this.width > playerX &&
                 this.positionY + this.height > playerY &&
                 this.positionY < playerY + playerHeight
             ) {
@@ -187,8 +188,8 @@ class Ball {
 
         if (player.id === "player3") {
             if (
-                this.positionY + this.height >= playerY &&
-                this.positionY <= playerY + playerHeight &&
+                this.positionY + this.height > playerY &&
+                this.positionY < playerY + playerHeight &&
                 this.positionX + this.width > playerX &&
                 this.positionX < playerX + playerWidth
             ) {
@@ -201,8 +202,8 @@ class Ball {
 
         if (player.id === "player4") {
             if (
-                this.positionY <= playerY &&
-                this.positionY + this.height >= playerY &&
+                this.positionY < playerY &&
+                this.positionY + this.height > playerY &&
                 this.positionX + this.width > playerX &&
                 this.positionX < playerX + playerWidth
             ) {
@@ -248,7 +249,7 @@ const player2 = new Player(7, 20, 90, 40, 'player2', 5);
 const player3 = new Player(35, 5, 40, 5, 'player3', 5);
 const player4 = new Player(35, 5, 40, 90, 'player4', 5);
 
-
+const timerElm = document.getElementById('timer');
 const soundBallBounce = new Audio('../Assets/whoosh.mp3');
 const soundGameOver = new Audio('../Assets/laugh.mp3');
 const soundGame = new Audio('./Assets/theme-song.mp3')
@@ -283,8 +284,35 @@ document.addEventListener('keydown', (e) => {
         player4.moveRight();
     }
 });
-
-
 setInterval(() => {
     ball.move([player, player2, player3, player4]);
 }, 1000 / 60);
+
+let level = 1;
+let speedIncreaseInterval = 20;
+let speedMultiplier = 1.1; 
+let currentInterval = 0;
+let gameTime = 0;
+
+let levelUpTimer = setInterval(() => {
+    level++;
+
+    ball.xSpeed *= speedMultiplier;
+    ball.ySpeed *= speedMultiplier;
+
+    console.log(`¡Nuevo nivel! Nivel: ${level}. Velocidad de la pelota: ${Math.sqrt(ball.xSpeed ** 2 + ball.ySpeed ** 2)}`);
+
+
+    if (level >= 10) {
+        clearInterval(levelUpTimer); 
+        console.log("¡Nivel máximo alcanzado!");
+    }
+}, speedIncreaseInterval * 1000);
+
+let timerInterval = setInterval(() => {
+    gameTime++;
+    
+    if (timerElm) {
+        timerElm.innerHTML = `Tiempo: ${gameTime}s`;
+    }
+}, 1000); 
