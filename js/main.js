@@ -15,28 +15,28 @@ class Player {
 
     moveDown() {
 
-        if (this.yCoord < 100 - this.height) {
+        if (this.yCoord < 95 - this.height) {
             this.yCoord += this.speed;
             this.draw();
         }
     }
 
     moveUp() {
-        if (this.yCoord > 0) {
+        if (this.yCoord > 5) {
             this.yCoord -= this.speed;
             this.draw();
         }
     }
 
     moveRight() {
-        if (this.xCoord < 100 - this.width) {
+        if (this.xCoord < 95 - this.width) {
             this.xCoord += this.speed;
             this.draw();
         }
 
     }
     moveLeft() {
-        if (this.xCoord > 0) {
+        if (this.xCoord > 5) {
             this.xCoord -= this.speed;
             this.draw();
         }
@@ -60,7 +60,6 @@ class Player {
         this.playerElm.style.backgroundImage = "url('../Assets/players2.jpg')";
         this.playerElm.style.backgroundSize = "cover";
         this.playerElm.style.backgroundPosition = "center"
-        this.playerElm.style.backgroundColor = "rgb(255, 202, 127)";
         this.playerElm.style.border = "2px solid black";
         this.playerElm.style.borderRadius = "30%"
     }
@@ -83,15 +82,15 @@ class Ball {
     }
 
     move(players) {
-        // if (this.gameOver) {
+        if (this.gameOver) {
 
-        //     setTimeout(() => {
-        //         location.href = "gameover.html";
-        //     }, 1500);
+            setTimeout(() => {
+                location.href = "gameover.html";
+            }, 1500);
 
-        //     soundGameOver.play();
-        //     return;
-        // };
+            soundGameOver.play();
+            return;
+        };
 
         const boardWidth = this.board.offsetWidth;
         const boardHeight = this.board.offsetHeight;
@@ -226,28 +225,27 @@ class Ball {
 
 
     drawBall() {
-        const ballElm = document.getElementById('ball');
-        if (ballElm) {
-            ballElm.style.left = this.positionX + 'px';
-            ballElm.style.top = this.positionY + 'px';
-            ballElm.style.width = this.width + 'px';
-            ballElm.style.height = this.height + 'px';
-        }
-        ballElm.style.backgroundImage = "url('../Assets/itachi.png')";
-        ballElm.style.backgroundSize = "cover";
-        ballElm.style.backgroundColor = "black";
-        ballElm.style.border = "2px solid black";
-        ballElm.style.borderRadius = "50%";
+        
+        this.ballElm.style.left = this.positionX + 'px';
+        this.ballElm.style.top = this.positionY + 'px';
+        this.ballElm.style.width = this.width + 'px';
+        this.ballElm.style.height = this.height + 'px';
+        
+        this.ballElm.style.backgroundImage = "url('../Assets/itachi.png')";
+        this.ballElm.style.backgroundSize = "cover";
+        this.ballElm.style.backgroundColor = "black";
+        this.ballElm.style.border = "2px solid black";
+        this.ballElm.style.borderRadius = "50%";
     }
 };
 
 const board = document.getElementById("board");
 const ball = new Ball(30, 30, 'ball');
 
-const player = new Player(7, 20, 5, 40, 'player', 5);
-const player2 = new Player(7, 20, 90, 40, 'player2', 5);
-const player3 = new Player(35, 5, 40, 5, 'player3', 5);
-const player4 = new Player(35, 5, 40, 90, 'player4', 5);
+const player = new Player(7, 20, 5, 40, 'player', 7);
+const player2 = new Player(7, 20, 90, 40, 'player2', 7);
+const player3 = new Player(35, 5, 30, 5, 'player3', 7);
+const player4 = new Player(35, 5, 30, 90, 'player4', 7);
 
 const timerElm = document.getElementById('timer');
 const soundBallBounce = new Audio('../Assets/whoosh.mp3');
@@ -289,10 +287,10 @@ setInterval(() => {
 }, 1000 / 60);
 
 let level = 1;
-let speedIncreaseInterval = 20;
-let speedMultiplier = 1.1; 
+let speedIncreaseInterval = 15;
+let speedMultiplier = 1.1;
 let currentInterval = 0;
-let gameTime = 0;
+let gameTime = 10;
 
 let levelUpTimer = setInterval(() => {
     level++;
@@ -304,14 +302,17 @@ let levelUpTimer = setInterval(() => {
 
 
     if (level >= 10) {
-        clearInterval(levelUpTimer); 
+        clearInterval(levelUpTimer);
         console.log("¡Nivel máximo alcanzado!");
     }
 }, speedIncreaseInterval * 1000);
 
 let timerInterval = setInterval(() => {
-    gameTime++;
-    
+    gameTime--;
+    if(gameTime === 0){
+    ball.gameOver = true;
+    }
+
     if (timerElm) {
         timerElm.innerHTML = `Tiempo: ${gameTime}s`;
     }

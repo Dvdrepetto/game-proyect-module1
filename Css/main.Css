@@ -12,7 +12,7 @@ body {
 
 #gameScreen {
     width: 480px;
-    height: 640px;
+    height: 690px;
     border: 5px solid white;
     position: relative;
     background-color: #222;
@@ -20,16 +20,31 @@ body {
     justify-content: center;
     align-items: center;
 }
-#timer{
-    position: absolute; 
-    top: 200px; 
-    left: 200px; 
-    font-size: 20px; 
-    color: white; 
-    background-color: 
-    rgba(0, 0, 0, 0.5); 
-    padding: 5px 10px; 
-    border-radius: 5px;
+#timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 15px;
+    background-color: #333;
+    color: #ff0000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 8px #ff0000;
+    text-align: center;
+    z-index: 1000;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
+    }
 }
 
 #board {
