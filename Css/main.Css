@@ -6,6 +6,8 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
+   background-image: url(../Assets/backgorund1.jpg);
+   background-size: cover;
 }
 
 #gameScreen {
