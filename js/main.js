@@ -10,6 +10,7 @@ class Player {
 
         this.playerElm = document.getElementById(this.id);
         this.draw();
+
     }
 
     moveDown() {
@@ -56,6 +57,9 @@ class Player {
         this.playerElm.style.left = absoluteX + "px";
         this.playerElm.style.top = absoluteY + "px";
 
+        this.playerElm.style.backgroundImage = "url('../Assets/players2.jpg')";
+        this.playerElm.style.backgroundSize = "cover";
+        this.playerElm.style.backgroundPosition = "center"
         this.playerElm.style.backgroundColor = "rgb(255, 202, 127)";
         this.playerElm.style.border = "2px solid black";
     }
@@ -79,63 +83,64 @@ class Ball {
 
     move(players) {
         if (this.gameOver) {
-            location.href = "gameover.html";
+
+            setTimeout(() => {
+                location.href = "gameover.html";
+            }, 1500);
+
+            soundGameOver.play();
+            return;
         };
-    
+
         const boardWidth = this.board.offsetWidth;
         const boardHeight = this.board.offsetHeight;
-    
-        // Lógica para el movimiento en el eje X (izquierda y derecha)
+
         if (this.positionX + this.width + this.xSpeed <= boardWidth && this.positionX + this.xSpeed >= 0) {
             this.positionX += this.xSpeed;
         } else {
             this.xSpeed = -this.xSpeed;
         }
-    
-        // Lógica para el movimiento en el eje Y (arriba y abajo)
+
         if (this.positionY + this.height + this.ySpeed <= boardHeight && this.positionY + this.ySpeed >= 0) {
             this.positionY += this.ySpeed;
         } else {
             this.ySpeed = -this.ySpeed;
         }
-    
-        // Verificación de colisiones con los jugadores
+
         players.forEach(player => {
             if (this.isColliding(player)) {
                 this.handleCollision(player);
             }
         });
-    
-        // Verificar si el balón se ha ido fuera del área de juego (game over)
-        if (this.positionY <= 2) {  // Si el balón toca el borde superior
+
+        if (this.positionY <= 2) {
             console.log("Game Over: Toco el borde superior");
-            this.gameOver = true;  // El juego termina
+            this.gameOver = true;
         }
-    
-        // Verificación de Game Over para el borde inferior
-        if (this.positionY + this.height >= boardHeight) {  // Si el balón toca el borde inferior
+
+        if (this.positionY + this.height >= boardHeight) {
             console.log("Game Over: Toco el borde inferior");
             this.gameOver = true;
         }
-    
-        // Verificación de Game Over para los bordes izquierdo y derecho
-        if (this.positionX <= 0 || this.positionX + this.width >= boardWidth) {  // Si el balón toca los bordes izquierdo o derecho
+
+
+        if (this.positionX <= 0 || this.positionX + this.width >= boardWidth) {
             console.log("Game Over: Toco el borde izquierdo o derecho");
             this.gameOver = true;
         }
-    
+
         this.drawBall();
     }
 
     isColliding(player) {
         const boardWidth = this.board.offsetWidth;
         const boardHeight = this.board.offsetHeight;
-    
+
         const playerX = (player.xCoord / 100) * boardWidth;
         const playerY = (player.yCoord / 100) * boardHeight;
         const playerWidth = (player.width / 100) * boardWidth;
         const playerHeight = (player.height / 100) * boardHeight;
-    
+
         return !(this.positionX + this.width < playerX ||
             this.positionX > playerX + playerWidth ||
             this.positionY + this.height < playerY ||
@@ -164,6 +169,7 @@ class Ball {
                 this.xSpeed = Math.abs(this.xSpeed);
                 this.positionX = playerX + playerWidth;
             }
+            this.playSound();
         }
         if (player.id === "player2") {
             if (
@@ -176,6 +182,7 @@ class Ball {
                 this.xSpeed = -Math.abs(this.xSpeed);
                 this.positionX = playerX - this.width;
             }
+            this.playSound();
         }
 
         if (player.id === "player3") {
@@ -189,6 +196,7 @@ class Ball {
                 this.ySpeed = Math.abs(this.ySpeed);
                 this.positionY = playerY + playerHeight;
             }
+            this.playSound();
         }
 
         if (player.id === "player4") {
@@ -202,10 +210,17 @@ class Ball {
                 this.ySpeed = -Math.abs(this.ySpeed);
                 this.positionY = playerY - this.height;
             }
+            this.playSound();
+
         }
         const magnitude = Math.sqrt(this.xSpeed ** 2 + this.ySpeed ** 2);
         this.xSpeed = (this.xSpeed / magnitude) * totalSpeed;
         this.ySpeed = (this.ySpeed / magnitude) * totalSpeed;
+    }
+
+    playSound() {
+        soundBallBounce.currentTime = 0;
+        soundBallBounce.play();
     }
 
 
@@ -217,7 +232,7 @@ class Ball {
             ballElm.style.width = this.width + 'px';
             ballElm.style.height = this.height + 'px';
         }
-        ballElm.style.backgroundImage = "url('./Assets/itachi.png')";
+        ballElm.style.backgroundImage = "url('../Assets/itachi.png')";
         ballElm.style.backgroundSize = "cover";
         ballElm.style.backgroundColor = "black";
         ballElm.style.border = "2px solid black";
@@ -228,10 +243,22 @@ class Ball {
 const board = document.getElementById("board");
 const ball = new Ball(30, 30, 'ball');
 
-const player = new Player(5, 20, 5, 40, 'player', 5);
-const player2 = new Player(5, 20, 90, 40, 'player2', 5);
+const player = new Player(7, 20, 5, 40, 'player', 5);
+const player2 = new Player(7, 20, 90, 40, 'player2', 5);
 const player3 = new Player(35, 5, 40, 5, 'player3', 5);
 const player4 = new Player(35, 5, 40, 90, 'player4', 5);
+
+
+const soundBallBounce = new Audio('../Assets/whoosh.mp3');
+const soundGameOver = new Audio('../Assets/laugh.mp3');
+const soundGame = new Audio('./Assets/theme-song.mp3')
+soundGame.loop = true;
+soundGame.volume = 0.2;
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    soundGame.play();
+});
+
 
 window.addEventListener("resize", () => {
     player.draw();
@@ -242,17 +269,16 @@ window.addEventListener("resize", () => {
 });
 
 document.addEventListener('keydown', (e) => {
-
-    if (e.code === "ArrowUp") {
+    if (e.code === "ArrowUp" || e.code === "KeyW") {
         player.moveUp();
         player2.moveUp();
-    } else if (e.code === "ArrowDown") {
+    } else if (e.code === "ArrowDown" || e.code === "KeyS") {
         player.moveDown();
         player2.moveDown();
-    } else if (e.code === "ArrowLeft") {
+    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
         player3.moveLeft();
         player4.moveLeft();
-    } else if (e.code === "ArrowRight") {
+    } else if (e.code === "ArrowRight" || e.code === "KeyD") {
         player3.moveRight();
         player4.moveRight();
     }
