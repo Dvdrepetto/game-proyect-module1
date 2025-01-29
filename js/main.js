@@ -228,10 +228,10 @@ class Ball {
 const board = document.getElementById("board");
 const ball = new Ball(30, 30, 'ball');
 
-const player = new Player(7, 20, 5, 40, 'player', 7);
-const player2 = new Player(7, 20, 90, 40, 'player2', 7);
-const player3 = new Player(35, 5, 30, 5, 'player3', 7);
-const player4 = new Player(35, 5, 30, 90, 'player4', 7);
+const player = new Player(7, 20, 5, 40, 'player', 1);
+const player2 = new Player(7, 20, 90, 40, 'player2', 1);
+const player3 = new Player(35, 5, 30, 5, 'player3', 1);
+const player4 = new Player(35, 5, 30, 90, 'player4', 1);
 
 const timerElm = document.getElementById('timer');
 const soundBallBounce = new Audio('./Assets/whoosh.mp3');
@@ -256,21 +256,64 @@ window.addEventListener("resize", () => {
     ball.drawBall();
 });
 
-document.addEventListener('keydown', (e) => {
-    if (e.code === "ArrowUp" || e.code === "KeyW") {
+let keysPressed = {
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
+    KeyW: false,
+    KeyS: false,
+    KeyA: false,
+    KeyD: false
+};
+
+function movePlayers() {
+    if (keysPressed.ArrowUp || keysPressed.KeyW) {
         player.moveUp();
         player2.moveUp();
-    } else if (e.code === "ArrowDown" || e.code === "KeyS") {
+    }
+    if (keysPressed.ArrowDown || keysPressed.KeyS) {
         player.moveDown();
         player2.moveDown();
-    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+    }
+    if (keysPressed.ArrowLeft || keysPressed.KeyA) {
         player3.moveLeft();
         player4.moveLeft();
-    } else if (e.code === "ArrowRight" || e.code === "KeyD") {
+    }
+    if (keysPressed.ArrowRight || keysPressed.KeyD) {
         player3.moveRight();
         player4.moveRight();
     }
+}
+document.addEventListener('keydown', (e) => {
+    if (e.code === "ArrowUp" || e.code === "KeyW") {
+        keysPressed[e.code] = true;
+    } else if (e.code === "ArrowDown" || e.code === "KeyS") {
+        keysPressed[e.code] = true;
+    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+        keysPressed[e.code] = true;
+    } else if (e.code === "ArrowRight" || e.code === "KeyD") {
+        keysPressed[e.code] = true;
+    }
 });
+document.addEventListener('keyup', (e) => {
+    if (e.code === "ArrowUp" || e.code === "KeyW") {
+        keysPressed[e.code] = false;
+    } else if (e.code === "ArrowDown" || e.code === "KeyS") {
+        keysPressed[e.code] = false;
+    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+        keysPressed[e.code] = false;
+    } else if (e.code === "ArrowRight" || e.code === "KeyD") {
+        keysPressed[e.code] = false;
+    }
+});
+
+function gameLoop() {
+    movePlayers();
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();
+
 setInterval(() => {
     ball.move([player, player2, player3, player4]);
 }, 1000 / 60);
