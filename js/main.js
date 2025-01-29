@@ -57,7 +57,7 @@ class Player {
         this.playerElm.style.left = absoluteX + "px";
         this.playerElm.style.top = absoluteY + "px";
 
-        this.playerElm.style.backgroundImage = "url('../Assets/players2.jpg')";
+        this.playerElm.style.backgroundImage = "url('./Assets/players2.jpg')";
         this.playerElm.style.backgroundSize = "cover";
         this.playerElm.style.backgroundPosition = "center"
         this.playerElm.style.border = "2px solid black";
@@ -217,7 +217,7 @@ class Ball {
         this.ballElm.style.width = this.width + 'px';
         this.ballElm.style.height = this.height + 'px';
         
-        this.ballElm.style.backgroundImage = "url('../Assets/itachi.png')";
+        this.ballElm.style.backgroundImage = "url('./Assets/itachi.png')";
         this.ballElm.style.backgroundSize = "cover";
         this.ballElm.style.backgroundColor = "black";
         this.ballElm.style.border = "2px solid black";
@@ -234,8 +234,8 @@ const player3 = new Player(35, 5, 30, 5, 'player3', 7);
 const player4 = new Player(35, 5, 30, 90, 'player4', 7);
 
 const timerElm = document.getElementById('timer');
-const soundBallBounce = new Audio('../Assets/whoosh.mp3');
-const soundGameOver = new Audio('../Assets/laugh.mp3');
+const soundBallBounce = new Audio('./Assets/whoosh.mp3');
+const soundGameOver = new Audio('./Assets/laugh.mp3');
 const soundGame = new Audio('./Assets/theme-song.mp3')
 soundGame.loop = true;
 soundGame.volume = 0.2;
