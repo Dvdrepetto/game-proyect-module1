@@ -84,13 +84,19 @@ class Ball {
     move(players) {
         const boardWidth = this.board.offsetWidth;
         const boardHeight = this.board.offsetHeight;
-        if (this.gameOver) {
-            setTimeout(() => {
-                location.href = "gameover.html";
-            }, 1500);
 
-            soundGameOver.play();
-            return;
+        if (this.gameOver) {
+            // Detener la música del juego si está sonando
+            if (window.gameMusic) {
+                window.gameMusic.pause();
+                window.gameMusic.currentTime = 0;
+            }
+        
+            // Guardamos en localStorage que estamos en Game Over
+            localStorage.setItem("gameMusic", "stopped");
+        
+            // Redirigir a gameOver.html
+            location.href = "gameover.html";
         }
 
         if (this.positionX <= 0 || this.positionX + this.width >= boardWidth) {
@@ -234,11 +240,12 @@ const player4 = new Player(35, 5, 30, 90, 'player4', 7);
 
 const timerElm = document.getElementById('timer');
 const soundBallBounce = new Audio('./Assets/whoosh.mp3');
-const soundGameOver = new Audio('./Assets/laugh.mp3');
+//const soundGameOver = new Audio('./Assets/laugh.mp3');
 const soundGame = new Audio("./Assets/theme-song.mp3")
 soundGame.loop = true;
 soundGame.volume = 0.1;
 soundBallBounce.volume = 0.2;
+
 
 document.addEventListener('DOMContentLoaded', () => {
     soundGame.play();

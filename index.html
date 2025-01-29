@@ -18,7 +18,14 @@
 
     <h1>The Sharingan Ball</h1>
     <p>Instructions for the game</p>
-    <button onclick="window.location.href='./main.html'">Start Game</button>
+    <button id="play-button"  onclick="window.location.href='./main.html'">Start Game</button>
+    
+    <script>
+            let gameMusic = new Audio("./Assets/index-song.mp3");
+            gameMusic.loop = true;
+            gameMusic.volume = 0.5;
+            gameMusic.play();
+    </script>
 </body>
 
 </html>
