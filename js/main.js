@@ -236,11 +236,11 @@ const player4 = new Player(35, 5, 30, 90, 'player4', 7);
 const timerElm = document.getElementById('timer');
 const soundBallBounce = new Audio('./Assets/whoosh.mp3');
 const soundGameOver = new Audio('./Assets/laugh.mp3');
-const soundGame = new Audio('./Assets/theme-song.mp3')
+const soundGame = new Audio("./Assets/theme-song.mp3")
 soundGame.loop = true;
 soundGame.volume = 0.2;
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     soundGame.play();
 });
 
