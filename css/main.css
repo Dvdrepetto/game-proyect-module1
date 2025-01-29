@@ -33,7 +33,7 @@ body {
     border: 2px solid #ff0000;
     box-shadow: 0 0 8px #ff0000;
     text-align: center;
-    z-index: 1000;
+    z-index: 100;
 }
 
 @keyframes pulse {
@@ -57,6 +57,7 @@ body {
 
 #ball {
     position: absolute;
+    z-index: 1000;
 }
 #index-page{
     display: block;
@@ -68,4 +69,23 @@ body {
     display: block;
     text-align: center;
     color: aliceblue;
+}
+
+video.background-video {
+    width: 540px;
+    height: 380px;
+    display: block;
+    margin: 20px auto;
+    border: 10px solid rgb(46, 28, 28);
+    border-radius: 30%;
+    object-fit: cover;
+}
+video.background-video:hover {
+    border: 10px solid #b11b00;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.content {
+    padding: 20px;
 }

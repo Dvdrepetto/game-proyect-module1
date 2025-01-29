@@ -82,39 +82,38 @@ class Ball {
     }
 
     move(players) {
+        const boardWidth = this.board.offsetWidth;
+        const boardHeight = this.board.offsetHeight;
         if (this.gameOver) {
             setTimeout(() => {
                 location.href = "gameover.html";
             }, 1500);
-    
+
             soundGameOver.play();
             return;
         }
-    
-        const boardWidth = this.board.offsetWidth;
-        const boardHeight = this.board.offsetHeight;
-    
+
         if (this.positionX <= 0 || this.positionX + this.width >= boardWidth) {
             console.log("Game Over: Toco el borde izquierdo o derecho");
             this.gameOver = true;
         }
-    
+
         if (this.positionY <= 0 || this.positionY + this.height >= boardHeight) {
             console.log("Game Over: Toco el borde superior o inferior");
             this.gameOver = true;
         }
-    
+
         if (this.gameOver) return;
-    
+
         this.positionX += this.xSpeed;
         this.positionY += this.ySpeed;
-    
+
         players.forEach(player => {
             if (this.isColliding(player)) {
                 this.handleCollision(player);
             }
         });
-    
+
         this.drawBall();
     }
 
@@ -211,15 +210,15 @@ class Ball {
 
 
     drawBall() {
-        
+
         this.ballElm.style.left = this.positionX + 'px';
         this.ballElm.style.top = this.positionY + 'px';
         this.ballElm.style.width = this.width + 'px';
         this.ballElm.style.height = this.height + 'px';
-        
-        this.ballElm.style.backgroundImage = "url('./Assets/itachi.png')";
+
+        this.ballElm.style.backgroundImage = "url('./Assets/png-sharingan.png')";
         this.ballElm.style.backgroundSize = "cover";
-        this.ballElm.style.backgroundColor = "black";
+
         this.ballElm.style.border = "2px solid black";
         this.ballElm.style.borderRadius = "50%";
     }
@@ -238,7 +237,8 @@ const soundBallBounce = new Audio('./Assets/whoosh.mp3');
 const soundGameOver = new Audio('./Assets/laugh.mp3');
 const soundGame = new Audio("./Assets/theme-song.mp3")
 soundGame.loop = true;
-soundGame.volume = 0.2;
+soundGame.volume = 0.1;
+soundBallBounce.volume = 0.2;
 
 document.addEventListener('DOMContentLoaded', () => {
     soundGame.play();
@@ -276,7 +276,7 @@ let level = 1;
 let speedIncreaseInterval = 15;
 let speedMultiplier = 1.1;
 let currentInterval = 0;
-let gameTime = 150;
+let gameTime = 100;
 
 let levelUpTimer = setInterval(() => {
     level++;
@@ -295,11 +295,17 @@ let levelUpTimer = setInterval(() => {
 
 let timerInterval = setInterval(() => {
     gameTime--;
-    if(gameTime === 0){
-    ball.gameOver = true;
+
+    let minutes = Math.floor(gameTime / 60);
+    let seconds = gameTime % 60;
+
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    if (gameTime === 0) {
+        ball.gameOver = true;
     }
 
     if (timerElm) {
-        timerElm.innerHTML = `Tiempo: ${gameTime}s`;
+        timerElm.innerHTML = `Time: ${minutes}:${seconds}`;
     }
 }, 1000); 
