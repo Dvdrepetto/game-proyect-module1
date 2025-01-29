@@ -83,52 +83,38 @@ class Ball {
 
     move(players) {
         if (this.gameOver) {
-
             setTimeout(() => {
                 location.href = "gameover.html";
             }, 1500);
-
+    
             soundGameOver.play();
             return;
-        };
-
+        }
+    
         const boardWidth = this.board.offsetWidth;
         const boardHeight = this.board.offsetHeight;
-
-        if (this.positionX + this.width + this.xSpeed <= boardWidth && this.positionX + this.xSpeed >= 0) {
-            this.positionX += this.xSpeed;
-        } else {
-            this.xSpeed = -this.xSpeed;
+    
+        if (this.positionX <= 0 || this.positionX + this.width >= boardWidth) {
+            console.log("Game Over: Toco el borde izquierdo o derecho");
+            this.gameOver = true;
         }
-
-        if (this.positionY + this.height + this.ySpeed <= boardHeight && this.positionY + this.ySpeed >= 0) {
-            this.positionY += this.ySpeed;
-        } else {
-            this.ySpeed = -this.ySpeed;
+    
+        if (this.positionY <= 0 || this.positionY + this.height >= boardHeight) {
+            console.log("Game Over: Toco el borde superior o inferior");
+            this.gameOver = true;
         }
-
+    
+        if (this.gameOver) return;
+    
+        this.positionX += this.xSpeed;
+        this.positionY += this.ySpeed;
+    
         players.forEach(player => {
             if (this.isColliding(player)) {
                 this.handleCollision(player);
             }
         });
-
-        if (this.positionY <= 2) {
-            console.log("Game Over: Toco el borde superior");
-            this.gameOver = true;
-        }
-
-        if (this.positionY + this.height >= boardHeight) {
-            console.log("Game Over: Toco el borde inferior");
-            this.gameOver = true;
-        }
-
-
-        if (this.positionX <= 0 || this.positionX + this.width >= boardWidth) {
-            console.log("Game Over: Toco el borde izquierdo o derecho");
-            this.gameOver = true;
-        }
-
+    
         this.drawBall();
     }
 
@@ -290,7 +276,7 @@ let level = 1;
 let speedIncreaseInterval = 15;
 let speedMultiplier = 1.1;
 let currentInterval = 0;
-let gameTime = 10;
+let gameTime = 150;
 
 let levelUpTimer = setInterval(() => {
     level++;
