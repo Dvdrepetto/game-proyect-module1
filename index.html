@@ -5,26 +5,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ball</title>
+    <title>The Sharingan Eye</title>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="icon" href="./Assets/png-sharingan.png" type="image/x-icon">
-    
+
 </head>
 
 <body id="index-page">
     <video class="background-video" autoplay loop muted>
         <source src="./Assets/naruto.mp4" type="video/mp4">
     </video>
+<div id="instructions">
+    <h1>The Sharingan Eye</h1>
+    <p><strong>Instructions for the Game</strong></p>
 
-    <h1>The Sharingan Ball</h1>
-    <p>Instructions for the game</p>
-    <button id="play-button"  onclick="window.location.href='./main.html'">Start Game</button>
-    
+    <p><strong>Objective</strong><br>
+        Survive as long as possible while controlling the ball. The game gets harder as you progress!</p>
+
+    <p><strong>How to Play</strong><br>
+        - Use the arrow keys (or touch controls if on mobile) to move the ball.<br>
+        - Avoid obstacles and stay within the game area.<br>
+        - Your speed will increase every 15 seconds as you level up.</p>
+
+    <p><strong>Winning & Losing</strong><br>
+        - If you reach Level 10, you win the game! 🎉<br>
+        - If the timer reaches 00:00, the game is over.<br>
+        - Stay focused and react quickly to survive!</p>
+
+    <p><strong>Additional Notes</strong><br>
+        - The game music will play continuously in the background.<br>
+        - If you lose, you will be redirected to the Game Over screen.<br>
+        - Try again and improve your survival time!</p>
+
+    <p>Good luck! 🚀🔥</p>
+</div>
+    <button id="play-button" onclick="window.location.href='./main.html'">Start Game</button>
+
     <script>
-            let gameMusic = new Audio("./Assets/index-song.mp3");
-            gameMusic.loop = true;
-            gameMusic.volume = 0.5;
-            gameMusic.play();
+        let gameMusic = new Audio("./Assets/index-song.mp3");
+        gameMusic.loop = true;
+        gameMusic.volume = 0.5;
+        gameMusic.play();
     </script>
 </body>
 

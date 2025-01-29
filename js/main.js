@@ -279,7 +279,7 @@ let level = 1;
 let speedIncreaseInterval = 15;
 let speedMultiplier = 1.1;
 let currentInterval = 0;
-let gameTime = 100;
+let gameTime = 150;
 
 let levelUpTimer = setInterval(() => {
     level++;
