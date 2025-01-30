@@ -209,6 +209,21 @@ class Ball {
         soundBallBounce.play();
     }
 
+    disappear(duration) {
+        let interval = setInterval(() => {
+            if (this.ballElm.style.visibility === "hidden") {
+                this.ballElm.style.visibility = "visible";
+            } else {
+                this.ballElm.style.visibility = "hidden";
+            }
+        }, 500);
+        
+        setTimeout(() => {
+            clearInterval(interval);
+            this.ballElm.style.visibility = "visible"; 
+        }, duration);
+        
+    }
 
     drawBall() {
 
@@ -319,13 +334,16 @@ setInterval(() => {
 }, 1000 / 60);
 
 let level = 1;
-let speedIncreaseInterval = 15;
+let speedIncreaseInterval = 10;
 let speedMultiplier = 1.1;
 let currentInterval = 0;
-let gameTime = 150;
+let gameTime = 100;
 
 let levelUpTimer = setInterval(() => {
     level++;
+    if(level >= 5){
+        ball.disappear(5000)
+    }
 
     ball.xSpeed *= speedMultiplier;
     ball.ySpeed *= speedMultiplier;
@@ -348,6 +366,7 @@ let timerInterval = setInterval(() => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
     if (gameTime === 0) {
+        clearInterval(timerInterval);
         ball.gameOver = true;
     }
 

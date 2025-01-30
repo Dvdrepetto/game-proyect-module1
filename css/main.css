@@ -91,9 +91,11 @@ video.background-video:hover {
     padding: 20px;
 }
 
-#play-button {
+#play-button, 
+#startMusicButton,
+#instructionsBtn{
     color: rgb(1, 0, 0);
-    border: 2px solid rgb(216, 2, 45);
+    border: 3px solid #f44336;
     border-radius: 0px;
     padding: 18px 36px;
     display: inline-block;
@@ -106,6 +108,49 @@ video.background-video:hover {
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
 }
-#play-button:hover {
+#play-button:hover,
+#startMusicButton:hover, 
+#closeInstructionsButton:hover,
+#instructionsBtn:hover{
     box-shadow: inset 0 0 0 50px #d80229;
+}
+
+#instructions {
+    position: absolute;
+    top: 10%;
+    left: 50%;         
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff; 
+    padding: 30px;
+    border: 3px solid #f44336; 
+    border-radius: 15px;  
+    width: 70%;           
+    text-align: center;   
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    z-index: 1000; 
+    animation: fadeIn 1s ease-out;
+}
+
+
+#closeInstructionsButton {
+    position: relative;
+    bottom: 34%;
+    right: 31%;
+    color: rgb(1, 0, 0);
+    border: 3px solid #f44336;
+    border-radius: 0px;
+    padding: 18px 36px;
+    display: inline-block;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #4b0000;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    z-index: 10000;
 }

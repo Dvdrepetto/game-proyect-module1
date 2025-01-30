@@ -19,17 +19,13 @@
         <h1>Game Over!</h1>
         <p>Sorry, you lost the game. Better luck next time!</p>
 
-        <button id="retryButton">Try Again</button>
+        <button id="retryButton" onclick="window.location.href ='./index.html'">Try Again</button>
         <script>
             window.onload = function () {
                 let soundGameOver = new Audio('./Assets/laugh.mp3');
                 soundGameOver.volume = 1;
                 soundGameOver.play();
             };
-    
-            document.getElementById("retryButton").addEventListener("click", function () {
-                window.location.href = "./index.html";
-            });
         </script>
 
 </body>

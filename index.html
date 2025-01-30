@@ -12,40 +12,26 @@
 </head>
 
 <body id="index-page">
-    <video class="background-video" autoplay loop muted>
+    <video id="vid-Back" class="background-video" autoplay loop muted>
         <source src="./Assets/naruto.mp4" type="video/mp4">
     </video>
-<div id="instructions">
-    <h1>The Sharingan Eye</h1>
-<!--  <p><strong>Instructions for the Game</strong></p> 
-
-    <p><strong>Objective</strong><br>
-        Survive as long as possible while controlling the ball. The game gets harder as you progress!</p>
-
-    <p><strong>How to Play</strong><br>
-        - Use the arrow keys (or touch controls if on mobile) to move the ball.<br>
-        - Avoid obstacles and stay within the game area.<br>
-        - Your speed will increase every 15 seconds as you level up.</p>
-
-    <p><strong>Winning & Losing</strong><br>
-        - If you reach Level 10, you win the game! 🎉<br>
-        - If the timer reaches 00:00, the game is over.<br>
-        - Stay focused and react quickly to survive!</p>
-
-    <p><strong>Additional Notes</strong><br>
-        - The game music will play continuously in the background.<br>
-        - If you lose, you will be redirected to the Game Over screen.<br>
-        - Try again and improve your survival time!</p>
-
-    <p>Good luck! 🚀🔥</p> -->
-</div>
     <button id="play-button" onclick="window.location.href='./main.html'">Start Game</button>
-
+    <button id="startMusicButton">♫</button>
+    <button id="instructionsBtn" onclick="window.location.href='./instructions.html'">Instructions</button>
     <script>
         let gameMusic = new Audio("./Assets/index-song.mp3");
         gameMusic.loop = true;
-        gameMusic.volume = 0.5;
-        gameMusic.play();
+        gameMusic.volume = 0.3;
+
+        const startMusicButton = document.getElementById("startMusicButton");
+        startMusicButton.addEventListener("click", () => {
+            if (gameMusic.paused) {
+            gameMusic.play();
+            startMusicButton.textContent = "Stop Music";  
+        } else {
+            gameMusic.pause();
+            startMusicButton.textContent = "♫"; 
+        }        });
     </script>
 </body>
 

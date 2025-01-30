@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="icon" href="./Assets/png-sharingan.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div id="instructions">
+        <h1>The Sharingan Eye</h1>
+        <p><strong>Instructions for the Game</strong></p>
+
+        <p><strong>Objective</strong><br>
+            Survive as long as possible while controlling the ball. The game gets harder as you progress!</p>
+
+        <p><strong>How to Play</strong><br>
+            - Use the arrow keys or "a", "s", "d" "w" to move the blocks.<br>
+            - Avoid obstacles and stay within the game area.<br>
+            - Your speed will increase every 15 seconds as you level up.</p>
+
+        <p><strong>Winning & Losing</strong><br>
+            - If you reach Level 10, you win the game! 🎉<br>
+            - you have 01:40 to reach it<br>
+            - Stay focused and react quickly to survive!</p>
+
+        <p><strong>Additional Notes</strong><br>
+            - The game music will play continuously in the background.<br>
+            - If you lose, you will be redirected to the Game Over screen.<br>
+            - Try again and improve your survival time!</p>
+
+        <p>Good luck! 🚀🔥</p>
+    </div>
+    <button id="closeInstructionsButton" onclick="window.location.href='./index.html'">go back</button>
+    <script>
+        window.onload = function () {
+            let gameMusic = new Audio("./Assets/index-song.mp3");
+            gameMusic.loop = true;
+            gameMusic.volume = 0.3;
+        };
+    </script>
+
+</body>
+
+</html>
