@@ -308,14 +308,13 @@ setInterval(() => {
 }, 1000 / 60);
 
 let level = 0;
-let speedIncreaseInterval = 10;
+let speedIncreaseInterval = 9.9;
 let speedMultiplier = 1.1;
-let currentInterval = 0;
 let gameTime = 100;
 
 let levelUpTimer = setInterval(() => {
     level++;
-    if (level >= 5) {
+    if (level >= 7) {
         ball.disappear(4000)
     }
 
