@@ -14,23 +14,20 @@
 <body>
 
     <div id="instructions">
-        <h1>The Sharingan Eye</h1>
-        <p><strong>Instructions for the Game</strong></p>
+        <h1>The Sharingan</h1>
+        <p><h2>Instructions for the Game</h2></p>
 
-        <p><strong>Objective</strong><br>
-            Survive as long as possible while controlling the ball. The game gets harder as you progress!</p>
-
-        <p><strong>How to Play</strong><br>
-            - Use the arrow keys or "a", "s", "d" "w" to move the blocks.<br>
-            - Avoid obstacles and stay within the game area.<br>
-            - Your speed will increase every 15 seconds as you level up.</p>
-
-        <p><strong>Winning & Losing</strong><br>
+        <p><h2>Objective</h2><br>
+            - Survive as long as possible while controlling the ball.<br>
+            - The game gets harder as you progress!</p>
+        <p><h2>How to Play</h2><br>
+            - Use the arrow keys or "a", "s", "d" "w" to move the blocks.</p>
+        <p><h2>Winning & Losing</h2><br>
             - If you reach Level 10, you win the game! 🎉<br>
             - you have 01:40 to reach it<br>
+            - if the ball touch any border you lose 👎<br>
             - Stay focused and react quickly to survive!</p>
-
-        <p><strong>Additional Notes</strong><br>
+        <p><h2>Additional Notes</h2><br>
             - The game music will play continuously in the background.<br>
             - If you lose, you will be redirected to the Game Over screen.<br>
             - Try again and improve your survival time!</p>
@@ -43,7 +40,9 @@
             let gameMusic = new Audio("./Assets/index-song.mp3");
             gameMusic.loop = true;
             gameMusic.volume = 0.3;
+            gameMusic.play();
         };
+        
     </script>
 
 </body>
